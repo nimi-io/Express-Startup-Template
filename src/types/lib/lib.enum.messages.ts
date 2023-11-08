@@ -1,0 +1,15 @@
+export default {
+  OK: "OK",
+  NOT_OK: "NOT_OK",
+  UNAUTHORIZED: "UNAUTHORIZED",
+  BAD_REQUEST: "BAD_REQUEST",
+  INVALID_TOKEN: "INVALID_TOKEN",
+  ERROR_STATUS: "Error",
+  SUCCESS_STATUS: "Success",
+  WARNING_STATUS: "Warning",
+  INFO_STATUS: "Info",
+  DEFAULT_STATUS: "Default",
+  LOADING_STATUS: "Loading",
+  DISABLED_STATUS: "Disabled",
+  ACTIVE_STATUS: "Active",
+};
