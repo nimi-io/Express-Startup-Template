@@ -82,6 +82,12 @@ class Auth /*extends AbstractRepository<User>*/ {
         },
       };
 
+      console.log(
+        enums.CURRENT_DATE,
+        enums.HTTP_OK,
+        enums.OK,
+        enums.LOGIN_CONTROLLER
+      );
       return ResultFunction(
         true,
         "login successful",
@@ -124,12 +130,12 @@ class Auth /*extends AbstractRepository<User>*/ {
 
       const userExist = await this.Users.findOne({ email });
       if (userExist) {
-          console.error(
-            enums.CURRENT_DATE,
-            enums.HTTP_CONFLICT,
-            enums.USER_ALREADY_EXISTS,
-            enums.SIGNUP_CONTROLLER
-          );
+        console.error(
+          enums.CURRENT_DATE,
+          enums.HTTP_CONFLICT,
+          enums.USER_ALREADY_EXISTS,
+          enums.SIGNUP_CONTROLLER
+        );
         return ResultFunction(
           false,
           enums.USER_ALREADY_EXISTS,
