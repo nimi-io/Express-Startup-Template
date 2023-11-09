@@ -124,7 +124,7 @@ class Auth /*extends AbstractRepository<User>*/ {
 
       const userExist = await this.Users.findOne({ email });
       if (userExist) {
-          console.log(
+          console.error(
             enums.CURRENT_DATE,
             enums.HTTP_CONFLICT,
             enums.USER_ALREADY_EXISTS,

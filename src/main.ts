@@ -27,7 +27,7 @@ mongoose
     console.log(enums.CURRENT_DATE, enums.MONGO_DB_CONNECTION_SUCCESS);
 
     app.listen(PORT, async () => {
-      console.log(`Listening on ${PORT}`);
+      console.log(enums.CURRENT_DATE, `Listening on ${PORT}`);
     });
   })
   .catch(() =>
