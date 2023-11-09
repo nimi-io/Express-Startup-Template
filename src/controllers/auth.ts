@@ -15,3 +15,12 @@ export const loginController = async (
   const response = await authFactory().login(input);
   return API.response(res, response.code, response); //res.status(response.code).json(response);
 };
+
+
+export const registerController = async( req: Request,
+  res: Response,
+  next: NextFunction) => {
+  const input = req.body;
+  const response = await authFactory().register(input);
+  return API.response(res, response.code, response); 
+  }

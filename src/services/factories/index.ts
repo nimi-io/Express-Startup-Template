@@ -1,7 +1,6 @@
-import Auth from '../classes/auth';
+import Auth from "../classes/auth";
+import { container } from "tsyringe";
 
 export const authFactory = () => {
-	// define parameters for initialization here
-
-	return new Auth();
+  return container.resolve(Auth);
 };
