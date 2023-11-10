@@ -17,6 +17,7 @@
 		"dotenv": "^16.3.1",
 		"express": "^4.18.2",
 		"express-cache": "^0.1.1",
+		"express-device": "^0.4.2",
 		"helmet": "^7.1.0",
 		"inversify": "^6.0.2",
 		"inversify-express-utils": "^6.4.6",

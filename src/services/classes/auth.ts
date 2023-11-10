@@ -24,6 +24,7 @@ import {
   verifyTokenValidator,
 } from "../../helpers/validators";
 import emailSender from "../../helpers/email";
+import Log from "./Abstract/log";
 
 @injectable()
 class Auth /*extends AbstractRepository<User>*/ {
@@ -32,9 +33,11 @@ class Auth /*extends AbstractRepository<User>*/ {
   // }
   Users: any;
   EmailSender: emailSender;
+  AuditLog: Log;
   constructor() {
     this.Users = new AbstractRepository(UserModel);
     this.EmailSender = new emailSender();
+    this.AuditLog = new Log();
   }
   public async login(input: ILogin) {
     try {
@@ -508,23 +511,22 @@ class Auth /*extends AbstractRepository<User>*/ {
       );
     }
   }
-  ///////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   hashPassword(password: string): string {
     const salt = bcrypt.genSaltSync();
     const hash = bcrypt.hashSync(password, salt);
     return hash;
   }
-
   comparePassword(candidatePassword: string, hashedPassword: string): boolean {
     return bcrypt.compareSync(candidatePassword, hashedPassword);
   }
-
   generateJwtToken(user: Record<string, any>): string {
     const token = jwt.sign(user, config.JwtToken);
     return token;
   }
-
   generateOtp(): number {
     const min = 10000000;
     const max = 99999999;

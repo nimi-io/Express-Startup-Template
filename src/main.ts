@@ -7,6 +7,7 @@ import enums from "./types/lib/index";
 import { info } from "winston";
 import helmet from "helmet";
 
+
 const app = express();
 const PORT = config.PORT; //process.env.PORT || 8080;
 
@@ -18,6 +19,13 @@ app.use("/api/v1", apiRouter);
 
 app.use("**", (req: Request, res: Response) => {
   return res.status(404).send("NOT FOUND");
+});
+
+app.get("/", (req: any, res: any) => {
+  // Access device information
+  const { type, os, browser } = req.device;
+
+  res.send(`Device Type: ${type}, OS: ${os}, Browser: ${browser}`);
 });
 
 mongoose
