@@ -8,7 +8,18 @@ export const registerValidator = Joi.object<User>({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
 });
+
 export const loginValidator = Joi.object<User>({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
+});
+
+export const emailOnlyValidator = Joi.object<User>({
+  email: Joi.string().email().required(),
+});
+
+export const verifyTokenValidator = Joi.object({
+  email: Joi.string().email().required(),
+  token: Joi.string().required(),
+  otp: Joi.number().required(),
 });

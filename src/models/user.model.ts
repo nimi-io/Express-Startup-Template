@@ -8,10 +8,16 @@ const userSchema = new Schema<User>({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
 
+  otpData: {
+    otp: { type: Number, required: false },
+    token: { type: String, required: false },
+    isExpired: { type: Boolean, required: false },
+    expires: { type: Date, required: false },
+  },
   lastLoginDate: { type: Date },
   role: { type: String },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: new Date() },
+  updatedAt: { type: Date, default: new Date() },
 });
 
 const UserModel = mongoose.model<User>("Users", userSchema);

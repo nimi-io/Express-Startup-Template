@@ -25,6 +25,13 @@ export interface IGetMetaProps<T> {
   page: number;
 }
 
+interface Token {
+  otp: string;
+  token: string;
+  isExpired: boolean;
+  expires: Date;
+}
+
 export interface User extends Document {
   _id?: string;
   username: string;
@@ -33,6 +40,7 @@ export interface User extends Document {
   firstName: string;
   lastName: string;
 
+  otpData?: Token;
   lastLoginDate?: Date;
   role: string;
   createdAt: Date;

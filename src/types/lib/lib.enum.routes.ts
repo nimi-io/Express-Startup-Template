@@ -13,4 +13,6 @@ export default {
 
   DELETE_USER_CONTROLLER: "::::::::::: AuthController::deleteUser",
   NOT_IMPLEMENTED_CONTROLLER: "::::::::::: Controller not implemented",
+  GENERATE_TOKEN_CONTROLLER: "::::::::::: AuthController::generateToken",
+  VERIFY_TOKEN_CONTROLLER: "::::::::::: AuthController::verifyToken",
 };

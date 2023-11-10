@@ -27,6 +27,26 @@ export const registerController = async (
   return API.response(res, response.code, response);
 };
 
+export const generatTokenController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const input = req.body;
+  const response = await authFactory().generateToken(input);
+  return API.response(res, response.code, response); //res.status(response.code).json(response);
+};
+
+export const verifyTokenController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const input = req.body;
+  const response = await authFactory().verifyToken(input);
+  return API.response(res, response.code, response); //res.status(response.code).json(response);
+};
+
 export const notImplementedController = async (
   req: Request,
   res: Response,
