@@ -2,10 +2,12 @@ import { Request, Response, Router } from "express";
 import authRouter from "./auth";
 import { ResultFunction } from "../helpers/utils";
 import enums from "../types/lib/index";
+import userRouter from "./user";
 
 const apiRouter = Router();
 
 apiRouter.use("/auth", authRouter);
+apiRouter.use("/user", userRouter);
 
 apiRouter.use("/hello", (req: Request, res: Response) => {
   const data = ResultFunction(
