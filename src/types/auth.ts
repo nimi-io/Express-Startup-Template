@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export interface ILogin {
   email: string;
   password: string;
@@ -25,4 +27,8 @@ export interface ResetPasswordData {
 }
 export interface emailOnly {
   email: string;
+}
+
+export interface RequestExtUser extends Request {
+  user?: any;
 }
