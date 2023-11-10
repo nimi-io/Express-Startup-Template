@@ -10,7 +10,7 @@ export default {
   GET_USERS_CONTROLLER: "::::::::::: AuthController::getUsers",
   GET_USER_BY_ID_CONTROLLER: "::::::::::: AuthController::getUserById",
   UPDATE_USER_CONTROLLER: "::::::::::: AuthController::updateUser",
-
+  VERIFY_TOKEN_MIDDLEWARE: "::::::::::: VerifyTokenMiddleware",
   DELETE_USER_CONTROLLER: "::::::::::: AuthController::deleteUser",
   NOT_IMPLEMENTED_CONTROLLER: "::::::::::: Controller not implemented",
   GENERATE_TOKEN_CONTROLLER: "::::::::::: AuthController::generateToken",
