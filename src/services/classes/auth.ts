@@ -5,12 +5,13 @@ import {
   LoginData,
   emailOnly,
   VerifyTokenData,
+  ResetPasswordData,
 } from "../../types/auth";
 import { ResultFunction } from "../../helpers/utils";
 import enums from "../../types/lib/index";
 import "reflect-metadata";
 import { injectable, container } from "tsyringe";
-import { AbstractRepository } from "./database";
+import { AbstractRepository } from "./Abstract/database";
 import { UserModel } from "../../models/user.model";
 import { User } from "../../types/db";
 import * as bcrypt from "bcrypt-nodejs";
@@ -19,6 +20,7 @@ import {
   emailOnlyValidator,
   loginValidator,
   registerValidator,
+  resetPasswordValidator,
   verifyTokenValidator,
 } from "../../helpers/validators";
 import emailSender from "../../helpers/email";
@@ -390,16 +392,124 @@ class Auth /*extends AbstractRepository<User>*/ {
       );
     }
   }
-  // public async resetPassword(input: resetPasswordData) {
-  //   return ResultFunction(
-  //     true,
-  //     enums.SUCCESS_STATUS,
-  //     enums.HTTP_CREATED,
-  //     enums.OK,
-  //     null
-  //   );
-  // }
+  public async resetPassword(input: ResetPasswordData) {
+    try {
+      const { error } = await resetPasswordValidator.validate(input);
+      if (error) {
+        console.error(
+          enums.CURRENT_DATE,
+          enums.ERROR_STATUS,
+          error,
+          enums.RESET_PASSWORD_CONTROLLER
+        );
 
+        return ResultFunction(
+          false,
+          error.message,
+          enums.HTTP_UNPROCESSABLE_ENTITY,
+          enums.NOT_OK,
+          null
+        );
+      }
+      const { email, password, otp, token } = input;
+
+      const fetchUser = await this.Users.findOne({ email });
+      if (!fetchUser) {
+        console.error(
+          enums.CURRENT_DATE,
+          enums.HTTP_UNAUTHORIZED,
+          enums.INVALID_TOKEN,
+          enums.RESET_PASSWORD_CONTROLLER
+        );
+
+        return ResultFunction(
+          false,
+          enums.INVALID_TOKEN,
+          enums.HTTP_UNAUTHORIZED,
+          enums.UNAUTHORIZED,
+          null
+        );
+      }
+
+      if (
+        !(
+          fetchUser.otpData.otp == otp &&
+          fetchUser.otpData.token == token &&
+          !fetchUser.otpData.isExpired &&
+          fetchUser.otpData.expires < new Date()
+        )
+      ) {
+        console.error(
+          enums.CURRENT_DATE,
+          enums.HTTP_UNAUTHORIZED,
+          enums.INVALID_TOKEN,
+          enums.VERIFY_TOKEN_CONTROLLER
+        );
+
+        return ResultFunction(
+          false,
+          enums.INVALID_TOKEN,
+          enums.HTTP_UNAUTHORIZED,
+          enums.EXPIRED_TOKEN,
+          null
+        );
+      }
+      const hashedPassword = this.hashPassword(password);
+      const updatePassword = await this.Users.findOneAndUpdate(
+        { email },
+        {
+          password: hashedPassword,
+          "otpData.isExpired": true,
+        }
+      );
+      if (!updatePassword) {
+        console.error(
+          enums.CURRENT_DATE,
+          enums.HTTP_UNAUTHORIZED,
+          enums.INVALID_TOKEN,
+          enums.RESET_PASSWORD_CONTROLLER
+        );
+
+        return ResultFunction(
+          false,
+          enums.INVALID_TOKEN,
+          enums.HTTP_UNAUTHORIZED,
+          enums.UNAUTHORIZED,
+          null
+        );
+      }
+      console.log(
+        enums.CURRENT_DATE,
+        enums.HTTP_OK,
+        enums.OK,
+        enums.RESET_PASSWORD_CONTROLLER
+      );
+      return ResultFunction(
+        true,
+        enums.SUCCESS_STATUS,
+        enums.HTTP_OK,
+        enums.OK,
+        null
+      );
+    } catch {
+      console.error(
+        enums.CURRENT_DATE,
+        enums.HTTP_UNAUTHORIZED,
+        enums.INVALID_TOKEN,
+        enums.RESET_PASSWORD_CONTROLLER
+      );
+
+      return ResultFunction(
+        false,
+        enums.INVALID_TOKEN,
+        enums.HTTP_INTERNAL_SERVER_ERROR,
+        enums.BAD_REQUEST,
+        null
+      );
+    }
+  }
+  ///////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////
   hashPassword(password: string): string {
     const salt = bcrypt.genSaltSync();
     const hash = bcrypt.hashSync(password, salt);

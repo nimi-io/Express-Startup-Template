@@ -15,4 +15,5 @@ export default {
   NOT_IMPLEMENTED_CONTROLLER: "::::::::::: Controller not implemented",
   GENERATE_TOKEN_CONTROLLER: "::::::::::: AuthController::generateToken",
   VERIFY_TOKEN_CONTROLLER: "::::::::::: AuthController::verifyToken",
+  RESET_PASSWORD_CONTROLLER: "::::::::::: AuthController::resetPassword",
 };

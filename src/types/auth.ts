@@ -17,6 +17,12 @@ export interface VerifyTokenData {
   token: string;
 }
 
+export interface ResetPasswordData {
+  email: string;
+  password: string;
+  otp: number;
+  token: string;
+}
 export interface emailOnly {
   email: string;
 }

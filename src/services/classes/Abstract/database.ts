@@ -15,7 +15,7 @@ import {
   IDefaultPaginationOptions,
   IGetMetaProps,
   IMeta,
-} from "../../types/db";
+} from "../../../types/db";
 import { injectable } from "inversify";
 export class AbstractRepository<TSchema> {
   constructor(private readonly schemaModel: Model<TSchema>) {}

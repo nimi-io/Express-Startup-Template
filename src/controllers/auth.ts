@@ -46,6 +46,15 @@ export const verifyTokenController = async (
   const response = await authFactory().verifyToken(input);
   return API.response(res, response.code, response); //res.status(response.code).json(response);
 };
+export const resetPasswordControlle = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const input = req.body;
+  const response = await authFactory().resetPassword(input);
+  return API.response(res, response.code, response); //res.status(response.code).json(response);
+};
 
 export const notImplementedController = async (
   req: Request,

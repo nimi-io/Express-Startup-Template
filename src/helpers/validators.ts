@@ -23,3 +23,10 @@ export const verifyTokenValidator = Joi.object({
   token: Joi.string().required(),
   otp: Joi.number().required(),
 });
+
+export const resetPasswordValidator = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required(),
+  token: Joi.string().required(),
+  otp: Joi.number().required(),
+});

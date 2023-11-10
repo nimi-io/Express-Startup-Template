@@ -4,6 +4,7 @@ import {
   loginController,
   notImplementedController,
   registerController,
+  resetPasswordControlle,
   verifyTokenController,
 } from "../controllers/auth";
 
@@ -15,7 +16,7 @@ authRouter.post("/register", registerController);
 authRouter.post("/logout", notImplementedController);
 authRouter.post("/generatToken", generatTokenController);
 authRouter.post("/verifyToken", verifyTokenController);
-authRouter.post("/resetPassword", notImplementedController);
+authRouter.post("/resetPassword", resetPasswordControlle);
 
 
 export default authRouter;
