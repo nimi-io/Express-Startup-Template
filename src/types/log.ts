@@ -1,4 +1,4 @@
-export interface IAuditLog extends Document {
+export interface IAuditLog {
   user: string;
   action: string;
   status: string;

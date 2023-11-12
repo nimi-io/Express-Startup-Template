@@ -23,4 +23,10 @@ export default {
   SOMETHING_WENT_WRONG: "Something went wrong",
   TRUE: true,
   FALSE: false,
+  LOGIN: (user: string): string => {
+    return `${user} logged is successfully`;
+  },
+  REGISTER: (user: string): string => {
+    return `${user} registered is successfully`;
+  },
 };

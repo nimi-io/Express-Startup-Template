@@ -105,6 +105,13 @@ class Auth /*extends AbstractRepository<User>*/ {
         enums.OK,
         enums.LOGIN_CONTROLLER
       );
+      await this.AuditLog.createLog({
+        action: enums.LOGIN(email),
+        user: checkDatabase._id ? checkDatabase._id : "",
+        status: enums.OK,
+        createdAt: new Date(),
+      });
+
       return ResultFunction(
         true,
         "login successful",
@@ -178,6 +185,13 @@ class Auth /*extends AbstractRepository<User>*/ {
         enums.CREATED,
         enums.SIGNUP_CONTROLLER
       );
+      await this.AuditLog.createLog({
+        action: enums.REGISTER(email),
+        user: user._id ? user._id : "",
+        status: enums.OK,
+        createdAt: new Date(),
+      });
+
       return ResultFunction(
         true,
         enums.SUCCESS_STATUS,
